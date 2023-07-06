@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+
+<launch>
+
+	<arg name="world_name" default="empty"/>
+	<arg name="paused" default="true"/>
+	<arg name="use_sim_time" default="true"/>
+	<arg name="gui" default="true"/>
+	<arg name="headless" default="false"/>
+	<arg name="debug" default="false"/>
+	
+	<!-- We resume the logic in empty_world.launch -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	        <arg name="world_name" value="$(find arm_description)/world/tag_world4.world"/>
+		<arg name="debug" value="$(arg debug)" />
+		<arg name="gui" value="$(arg gui)" />
+		<arg name="paused" value="$(arg paused)"/>
+		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+		<arg name="headless" value="$(arg headless)"/>
+	</include>
+	
+		    <node name="arm_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <remap from="joint_states" to="joint_states"/>
+    </node>
+
+	<rosparam file="$(find arm_description)/launch/controller.yaml" command="load"/>
+	
+<node args="joint_state_controller Rev3_position_controller Rev4_position_controller Rev5_position_controller Rev6_position_controller Rev7_position_controller Rev8_position_controller" name="controller_spawner" output="screen" 
+  		pkg="controller_manager" respawn="false" type="spawner"/>
+
+	<!-- Load the URDF into the ROS Parameter Server -->
+	<param name="robot_description" command="$(find xacro)/xacro '$(find arm_description)/urdf/aerial_arm_mod.xacro'" />
+	<!-- Run a python script to the send a service call to gazebo_ros to
+spawn a URDF robot -->
+	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model aerial_arm -param robot_description 
+	  -R 3.14 
+	  -J Rev3 0.0
+	  -J Rev4 -0.6641131000000002
+	  -J Rev5 1.2584849000000005
+	  -J Rev6 -0.0018849000000003002 
+	  -J Rev7 -0.6169906000000003
+	  -J Rev8 0.0"/>
+	
+
+</launch>
+
