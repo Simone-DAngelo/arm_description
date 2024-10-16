@@ -21,3 +21,4 @@ The manipulator is equipped with a force sensor on its End-Effector to measure t
 When a contact is detected the actual interaction force is stored in a /gazebo_msgs/ContactsState message.
 
 
+

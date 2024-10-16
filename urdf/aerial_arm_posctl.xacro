@@ -2,7 +2,7 @@
 <robot name="aerial_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <xacro:include filename="$(find arm_description)/urdf/materials.xacro" />
-<xacro:include filename="$(find arm_description)/urdf/aerial_arm.trans" />
+<xacro:include filename="$(find arm_description)/urdf/aerial_arm_posctl.trans" />
 <xacro:include filename="$(find arm_description)/urdf/aerial_arm.gazebo" />
 	<xacro:property name="fric" value="0.005" />
 	<xacro:property name="fric_ee" value="0.005" />

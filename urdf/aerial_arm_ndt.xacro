@@ -17,8 +17,8 @@
 <joint name="orientation_joint" type="fixed">
   <parent link="base_link"/>
   <child link="orientation_link"/>
-  <origin rpy="${pi/2} 0 -${pi/2}" xyz="0.0 0 0.0"/>
-  <!-- <origin rpy="${pi} 0 -${pi/2}" xyz="0.15 0 -0.07"/> -->
+  <!-- <origin rpy="${pi/2} 0 -${pi/2}" xyz="0.0 0 0.0"/> -->
+  <origin rpy="${pi} 0 -${pi/2}" xyz="0.15 0 -0.07"/>
 </joint>
 
 <link name="orientation_link"/>
@@ -195,8 +195,8 @@
   <child link="shoulder_2_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
   <limit
-      lower="-0.785375"
-      upper="0.785375"
+      lower="-3.1415"
+      upper="3.1415"
       effort="5"
       velocity="1.57"
    />
